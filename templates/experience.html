@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Rishabh Chaudhary</title>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-bubble.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume-cards.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        .page-title {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2d5a8a 100%);
+            transform: scale(1.05);
+        }
+        
+        .experience-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .experience-item {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #4a90e2;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .company-info h3 {
+            color: #4a90e2;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .company-info .position {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .company-info .duration {
+            color: #cccccc;
+            font-size: 1rem;
+        }
+        
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            background: #4a90e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .experience-description {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .skills-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .achievements-list {
+            margin-top: 20px;
+        }
+        
+        .achievements-list h4 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .achievements-list ul {
+            color: #cccccc;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+        
+        .achievements-list li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .company-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .experience-item {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-header">
+        <h2 class="page-title">Professional Experience</h2>
+        <a href="{{ url_for('index') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </div>
+    
+    <div class="experience-section">
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="company-info">
+                    <h3>TechCorp Solutions</h3>
+                    <div class="position">Senior Web Developer</div>
+                    <div class="duration">January 2023 - Present</div>
+                </div>
+                <div class="company-logo">TC</div>
+            </div>
+            <div class="experience-description">
+                Leading development of modern web applications using React, Node.js, and cloud technologies. 
+                Collaborating with cross-functional teams to deliver high-quality, scalable solutions that meet business requirements.
+            </div>
+            <div class="skills-used">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">TypeScript</span>
+            </div>
+            <div class="achievements-list">
+                <h4>Key Achievements:</h4>
+                <ul>
+                    <li>Reduced application load time by 40% through optimization techniques</li>
+                    <li>Led a team of 5 developers on a major client project</li>
+                    <li>Implemented CI/CD pipeline reducing deployment time by 60%</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="company-info">
+                    <h3>Digital Innovations Ltd</h3>
+                    <div class="position">Frontend Developer</div>
+                    <div class="duration">March 2022 - December 2022</div>
+                </div>
+                <div class="company-logo">DI</div>
+            </div>
+            <div class="experience-description">
+                Developed responsive and interactive user interfaces for e-commerce platforms. 
+                Worked closely with designers to implement pixel-perfect designs and ensure optimal user experience.
+            </div>
+            <div class="skills-used">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">Vue.js</span>
+                <span class="skill-tag">SASS</span>
+            </div>
+            <div class="achievements-list">
+                <h4>Key Achievements:</h4>
+                <ul>
+                    <li>Built 10+ responsive websites for various clients</li>
+                    <li>Improved website performance by 35%</li>
+                    <li>Mentored 3 junior developers</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="company-info">
+                    <h3>StartupXYZ</h3>
+                    <div class="position">Full Stack Developer Intern</div>
+                    <div class="duration">June 2021 - February 2022</div>
+                </div>
+                <div class="company-logo">SX</div>
+            </div>
+            <div class="experience-description">
+                Contributed to the development of a SaaS platform from concept to launch. 
+                Gained hands-on experience with modern web technologies and agile development methodologies.
+            </div>
+            <div class="skills-used">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Django</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Git</span>
+            </div>
+            <div class="achievements-list">
+                <h4>Key Achievements:</h4>
+                <ul>
+                    <li>Developed core features for the MVP</li>
+                    <li>Participated in user testing and feedback sessions</li>
+                    <li>Contributed to code reviews and documentation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-bubble" id="chat-bubble">
+        <span class="chat-bubble-icon">&#128172;</span>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">MY ASSISTANT</div>
+        <div id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off" />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            function appendMessage(text, type) {
+                let className = 'message ';
+                if (type === 'user') className += 'user-message';
+                else if (type === 'assistant') className += 'assistant-message';
+                else className += 'error-message';
+                $('#messages').append('<div class="' + className + '">' + text + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight);
+            }
+
+            $('#send-button').click(function() {
+                const message = $('#user-input').val().trim();
+                if (!message) return;
+                appendMessage('You: ' + message, 'user');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chat',
+                    type: 'POST',
+                    data: JSON.stringify({ message: message }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.reply) {
+                            appendMessage('Assistant: ' + data.reply, 'assistant');
+                        } else {
+                            appendMessage('Error: ' + (data.error || 'No reply'), 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        appendMessage('Error: Could not reach API (' + error + ')', 'error');
+                    }
+                });
+            });
+
+            $('#user-input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#send-button').click();
+                }
+            });
+
+            $('#chat-bubble').click(function() {
+                $('.chat-container').toggle();
+            });
+        });
+    </script>
+</body>
+</html> 

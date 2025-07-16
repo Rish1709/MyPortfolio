@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - Rishabh Chaudhary</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-bubble.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume-cards.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        .page-title {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2d5a8a 100%);
+            transform: scale(1.05);
+        }
+        
+        .education-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .education-item {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #4a90e2;
+        }
+        
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .institution-info h3 {
+            color: #4a90e2;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .institution-info .degree {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .institution-info .duration {
+            color: #cccccc;
+            font-size: 1rem;
+        }
+        
+        .institution-logo {
+            width: 80px;
+            height: 80px;
+            background: #4a90e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .education-description {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .gpa-info {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid #4a90e2;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .gpa-info h4 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .gpa-info p {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .courses-section {
+            margin-top: 25px;
+        }
+        
+        .courses-section h4 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .course-item {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid #4a90e2;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .course-item span {
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .education-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .institution-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .education-item {
+                padding: 30px 20px;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-header">
+        <h2 class="page-title">Education</h2>
+        <a href="{{ url_for('index') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </div>
+    
+    <div class="education-section">
+        <div class="education-item">
+            <div class="education-header">
+                <div class="institution-info">
+                    <h3>Indian Institute of Technology (BHU) Varanasi</h3>
+                    <div class="degree">Bachelor of Technology in Computer Science</div>
+                    <div class="duration">2020 - 2024</div>
+                </div>
+                <div class="institution-logo">
+                    <img src="{{ url_for('static', filename='iitbhu-logo.jpeg') }}" alt="IIT BHU Logo" style="width: 100%; height: auto; border-radius: 50%;">
+                </div>
+            </div>
+            <div class="education-description">
+                Pursued a comprehensive computer science curriculum focusing on software engineering, 
+                data structures, algorithms, and modern web technologies. Participated in various 
+                technical clubs and hackathons.
+            </div>
+            <div class="gpa-info">
+                <h4>Academic Performance</h4>
+                <p>CGPA: 7.6/10</p>
+            </div>
+            <div class="courses-section">
+                <h4>Key Courses:</h4>
+                <div class="courses-grid">
+                    <div class="course-item">
+                        <span>Data Structures & Algorithms</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Database Management Systems</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Web Development</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Machine Learning</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Software Engineering</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Computer Networks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="education-item">
+            <div class="education-header">
+                <div class="institution-info">
+                    <h3>Udemy Online Learning</h3>
+                    <div class="degree">Full Stack Web Development</div>
+                    <div class="duration">2022 - 2023</div>
+                </div>
+                <div class="institution-logo">UD</div>
+            </div>
+            <div class="education-description">
+                Completed comprehensive online courses covering modern web development technologies 
+                including React, Node.js, MongoDB, and deployment strategies.
+            </div>
+            <div class="courses-section">
+                <h4>Completed Courses:</h4>
+                <div class="courses-grid">
+                    <div class="course-item">
+                        <span>React - The Complete Guide</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Node.js & Express.js</span>
+                    </div>
+                    <div class="course-item">
+                        <span>MongoDB Masterclass</span>
+                    </div>
+                    <div class="course-item">
+                        <span>JavaScript ES6+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="education-item">
+            <div class="education-header">
+                <div class="institution-info">
+                    <h3>Harvard CS50</h3>
+                    <div class="degree">Introduction to Computer Science</div>
+                    <div class="duration">2021</div>
+                </div>
+                <div class="institution-logo">CS</div>
+            </div>
+            <div class="education-description">
+                Completed Harvard's renowned CS50 course covering fundamental computer science concepts, 
+                programming principles, and problem-solving techniques using C, Python, and SQL.
+            </div>
+            <div class="courses-section">
+                <h4>Topics Covered:</h4>
+                <div class="courses-grid">
+                    <div class="course-item">
+                        <span>C Programming</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Python</span>
+                    </div>
+                    <div class="course-item">
+                        <span>SQL Databases</span>
+                    </div>
+                    <div class="course-item">
+                        <span>Web Development</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-bubble" id="chat-bubble">
+        <span class="chat-bubble-icon">&#128172;</span>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">MY ASSISTANT</div>
+        <div id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off" />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            function appendMessage(text, type) {
+                let className = 'message ';
+                if (type === 'user') className += 'user-message';
+                else if (type === 'assistant') className += 'assistant-message';
+                else className += 'error-message';
+                $('#messages').append('<div class="' + className + '">' + text + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight);
+            }
+
+            $('#send-button').click(function() {
+                const message = $('#user-input').val().trim();
+                if (!message) return;
+                appendMessage('You: ' + message, 'user');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chat',
+                    type: 'POST',
+                    data: JSON.stringify({ message: message }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.reply) {
+                            appendMessage('Assistant: ' + data.reply, 'assistant');
+                        } else {
+                            appendMessage('Error: ' + (data.error || 'No reply'), 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        appendMessage('Error: Could not reach API (' + error + ')', 'error');
+                    }
+                });
+            });
+
+            $('#user-input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#send-button').click();
+                }
+            });
+
+            $('#chat-bubble').click(function() {
+                $('.chat-container').toggle();
+            });
+        });
+    </script>
+</body>
+</html> 

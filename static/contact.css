@@ -1,0 +1,59 @@
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: 20px;
+    backdrop-filter: blur(100px);
+    border: 1.6px solid rgba(255,255,255,0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.87rem;
+    font-weight: 350;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease; 
+}
+
+.contact-item:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.contact-item:hover::before {
+    left: 100%; 
+}
+
+.contact-item a {
+   color: white;
+   text-decoration: none;
+   font-weight: 600;
+   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+   transition: all 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #f0f8ff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    text-decoration: underline;
+}

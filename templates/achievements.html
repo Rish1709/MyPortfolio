@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Rishabh Chaudhary</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-bubble.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume-cards.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        .page-title {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2d5a8a 100%);
+            transform: scale(1.05);
+        }
+        
+        .achievements-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .achievement-item {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .achievement-item:hover::before {
+            left: 100%;
+        }
+        
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #ffd700;
+        }
+        
+        .achievement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .achievement-info h3 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .achievement-info .category {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .achievement-info .date {
+            color: #cccccc;
+            font-size: 1rem;
+        }
+        
+        .achievement-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .achievement-description {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .achievement-details {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .achievement-details h4 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .achievement-details ul {
+            color: #ffffff;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+        
+        .achievement-details li {
+            margin-bottom: 8px;
+        }
+        
+        .achievement-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .stat-number {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .achievement-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .achievement-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .achievement-item {
+                padding: 30px 20px;
+            }
+            
+            .achievement-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="page-header">
+        <h2 class="page-title">Achievements & Awards</h2>
+        <a href="{{ url_for('index') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </div>
+    
+    <div class="achievements-section">
+        <div class="achievement-item">
+            <div class="achievement-header">
+                <div class="achievement-info">
+                    <h3>Hackathon Winner</h3>
+                    <div class="category">Tech Innovation Challenge</div>
+                    <div class="date">March 2024</div>
+                </div>
+                <div class="achievement-icon">🏆</div>
+            </div>
+            <div class="achievement-description">
+                Won first place in the annual university hackathon for developing an innovative 
+                AI-powered educational platform that helps students learn programming concepts 
+                through interactive coding challenges.
+            </div>
+            <div class="achievement-details">
+                <h4>Project Highlights:</h4>
+                <ul>
+                    <li>Developed a real-time code execution environment</li>
+                    <li>Implemented AI-powered code analysis and feedback</li>
+                    <li>Created an intuitive user interface for beginners</li>
+                    <li>Integrated gamification elements for engagement</li>
+                </ul>
+            </div>
+            <div class="achievement-stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Students Reached</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24hrs</div>
+                    <div class="stat-label">Development Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">₹50,000</div>
+                    <div class="stat-label">Prize Money</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="achievement-item">
+            <div class="achievement-header">
+                <div class="achievement-info">
+                    <h3>Dean's List Recognition</h3>
+                    <div class="category">Academic Excellence</div>
+                    <div class="date">2022 - 2024</div>
+                </div>
+                <div class="achievement-icon">📚</div>
+            </div>
+            <div class="achievement-description">
+                Consistently maintained academic excellence with a CGPA of 8.5/10, earning 
+                recognition on the Dean's List for three consecutive semesters. Demonstrated 
+                strong performance in computer science courses and research projects.
+            </div>
+            <div class="achievement-details">
+                <h4>Academic Achievements:</h4>
+                <ul>
+                    <li>Top 5% of the class in Computer Science</li>
+                    <li>Outstanding performance in Data Structures & Algorithms</li>
+                    <li>Research paper published in university journal</li>
+                    <li>Mentored 10+ junior students in programming</li>
+                </ul>
+            </div>
+            <div class="achievement-stats">
+                <div class="stat-item">
+                    <div class="stat-number">8.5/10</div>
+                    <div class="stat-label">CGPA</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Semesters</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Students Mentored</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="achievement-item">
+            <div class="achievement-header">
+                <div class="achievement-info">
+                    <h3>Best Developer Award</h3>
+                    <div class="category">Company Recognition</div>
+                    <div class="date">December 2023</div>
+                </div>
+                <div class="achievement-icon">👨‍💻</div>
+            </div>
+            <div class="achievement-description">
+                Received the "Best Developer" award at TechCorp Solutions for exceptional 
+                contributions to multiple high-impact projects, innovative problem-solving, 
+                and mentorship of junior developers.
+            </div>
+            <div class="achievement-details">
+                <h4>Key Contributions:</h4>
+                <ul>
+                    <li>Led development of 3 major client projects</li>
+                    <li>Reduced application load time by 40%</li>
+                    <li>Implemented CI/CD pipeline reducing deployment time by 60%</li>
+                    <li>Mentored 5 junior developers</li>
+                </ul>
+            </div>
+            <div class="achievement-stats">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Major Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Performance Improvement</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Team Members Mentored</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="achievement-item">
+            <div class="achievement-header">
+                <div class="achievement-info">
+                    <h3>Open Source Contributor</h3>
+                    <div class="category">Community Impact</div>
+                    <div class="date">2023 - Present</div>
+                </div>
+                <div class="achievement-icon">🌟</div>
+            </div>
+            <div class="achievement-description">
+                Active contributor to open-source projects with significant impact on the 
+                developer community. Contributed to popular libraries and frameworks, 
+                helping thousands of developers worldwide.
+            </div>
+            <div class="achievement-details">
+                <h4>Contributions:</h4>
+                <ul>
+                    <li>Contributed to React ecosystem libraries</li>
+                    <li>Fixed critical bugs in popular npm packages</li>
+                    <li>Created educational content for developers</li>
+                    <li>Organized local developer meetups</li>
+                </ul>
+            </div>
+            <div class="achievement-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Pull Requests</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Stars Earned</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Projects Contributed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-bubble" id="chat-bubble">
+        <span class="chat-bubble-icon">&#128172;</span>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">MY ASSISTANT</div>
+        <div id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off" />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            function appendMessage(text, type) {
+                let className = 'message ';
+                if (type === 'user') className += 'user-message';
+                else if (type === 'assistant') className += 'assistant-message';
+                else className += 'error-message';
+                $('#messages').append('<div class="' + className + '">' + text + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight);
+            }
+
+            $('#send-button').click(function() {
+                const message = $('#user-input').val().trim();
+                if (!message) return;
+                appendMessage('You: ' + message, 'user');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chat',
+                    type: 'POST',
+                    data: JSON.stringify({ message: message }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.reply) {
+                            appendMessage('Assistant: ' + data.reply, 'assistant');
+                        } else {
+                            appendMessage('Error: ' + (data.error || 'No reply'), 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        appendMessage('Error: Could not reach API (' + error + ')', 'error');
+                    }
+                });
+            });
+
+            $('#user-input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#send-button').click();
+                }
+            });
+
+            $('#chat-bubble').click(function() {
+                $('.chat-container').toggle();
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--Provides a jQuery library-Makes it easier to write JavaScript code-->
+
+    <link rel="stylesheet" href="chat-container.css">
+    <link rel="stylesheet" href="chat-header.css">
+    <link rel="stylesheet" href="messages.css">
+    <link rel="stylesheet" href="input.css">
+    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="chat-bubble.css">
+    <link rel="stylesheet" href="send-button.css">
+    <link rel="stylesheet" href="portfolio-header.css">
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="resume-cards.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-header .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                gap: 20px;
+            }
+            
+            .contact-item {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .resume-title {
+                font-size: 2.5rem;
+            }
+            
+            .resume-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .resume-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!--Provides a font awesome icon-->
+</head>
+<body>
+    <div class="portfolio-header">
+        <h1>RISHABH CHAUDHARY</h1>
+        <div class="subtitle">Web Developer & Designer</div>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>  <!--Provides a phone icon-->
+                +91 7869830303
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i> <!--Provides an envelope icon-->
+                rishabhc1709@gmail.com
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin"></i> <!--Provides a LinkedIn icon-->
+                <a href="https://www.linkedin.com/in/rishabh-chaudhary-7b865227a" target="_blank">LinkedIn</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-github"></i> <!--Provides a GitHub icon-->
+                <a href="https://github.com/Rish1709" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="resume-section">
+        <h2 class="resume-title">My Resume</h2>
+        <div class="resume-grid">
+            <div class="resume-card" onclick="window.location.href='experience.html'">
+                <i class="fas fa-briefcase"></i>
+                <h3>Experience</h3>
+                <p>Explore my professional journey, work history, and career achievements in web development and design.</p>
+                <a href="experience.html" class="view-btn">View Experience</a>
+            </div>
+            
+            <div class="resume-card" onclick="window.location.href='education.html'">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Education</h3>
+                <p>Discover my academic background, certifications, and continuous learning journey in technology.</p>
+                <a href="education.html" class="view-btn">View Education</a>
+            </div>
+            
+            <div class="resume-card" onclick="window.location.href='skills.html'">
+                <i class="fas fa-code"></i>
+                <h3>Skills</h3>
+                <p>Browse through my technical skills, programming languages, frameworks, and development tools.</p>
+                <a href="skills.html" class="view-btn">View Skills</a>
+            </div>
+            
+            <div class="resume-card" onclick="window.location.href='projects.html'">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Projects</h3>
+                <p>Check out my portfolio of web applications, designs, and innovative solutions I've created.</p>
+                <a href="projects.html" class="view-btn">View Projects</a>
+            </div>
+            
+            <div class="resume-card" onclick="window.location.href='achievements.html'">
+                <i class="fas fa-trophy"></i>
+                <h3>Achievements</h3>
+                <p>Learn about my awards, recognitions, and notable accomplishments in the tech industry.</p>
+                <a href="achievements.html" class="view-btn">View Achievements</a>
+            </div>
+            
+            <div class="resume-card" onclick="window.location.href='certifications.html'">
+                <i class="fas fa-certificate"></i>
+                <h3>Certifications</h3>
+                <p>Explore my professional certifications, training programs, and specialized qualifications.</p>
+                <a href="certifications.html" class="view-btn">View Certifications</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-bubble" id="chat-bubble">
+        <span class="chat-bubble-icon">&#128172;</span>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">MY ASSISTANT</div>
+        <div id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off" />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            function appendMessage(text, type) {
+                let className = 'message ';
+                if (type === 'user') className += 'user-message';
+                else if (type === 'assistant') className += 'assistant-message';
+                else className += 'error-message';
+                $('#messages').append('<div class="' + className + '">' + text + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight);
+            }
+
+            $('#send-button').click(function() {
+                const message = $('#user-input').val().trim();
+                if (!message) return;
+                appendMessage('You: ' + message, 'user');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chat',
+                    type: 'POST',
+                    data: JSON.stringify({ message: message }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.reply) {
+                            appendMessage('Assistant: ' + data.reply, 'assistant');
+                        } else {
+                            appendMessage('Error: ' + (data.error || 'No reply'), 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        appendMessage('Error: Could not reach API (' + error + ')', 'error');
+                    }
+                });
+            });
+
+            $('#user-input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#send-button').click();
+                }
+            });
+
+            // Toggle chat container visibility
+            $('#chat-bubble').click(function() {
+                $('.chat-container').toggle();
+            });
+        });
+    </script>
+</body>
+</html>

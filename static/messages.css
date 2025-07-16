@@ -1,0 +1,55 @@
+#messages {
+    flex: 1;
+    padding: 18px;
+    overflow-y: auto !important;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 320px;
+}
+
+.message {
+    padding: 10px 16px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-break: break-word;
+    margin-bottom: 2px;
+    font-size: 1rem;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+    color: #fff;
+}
+
+.assistant-message {
+    align-self: flex-start;
+    background: #393e46;
+    color: #e0e0e0;
+}
+
+.error-message {
+    align-self: flex-start;
+    background: #b00020;
+    color: #fff;
+}
+
+/* Target the entire scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* The track (background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #2c2f33;  /* Dark track */
+  border-radius: 10px;
+}
+
+/* The thumb (the draggable bar) */
+::-webkit-scrollbar-thumb {
+  background: #7c7c7d;  /* Gradient thumb */
+  border-radius: 10px;
+}
+

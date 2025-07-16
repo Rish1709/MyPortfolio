@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Rishabh Chaudhary</title>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-bubble.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume-cards.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+ 
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        .page-title {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2d5a8a 100%);
+            transform: scale(1.05);
+        }
+        
+        .projects-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .project-item {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #4a90e2;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .project-info h3 {
+            color: #4a90e2;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .project-info .category {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .project-info .duration {
+            color: #cccccc;
+            font-size: 1rem;
+        }
+        
+        .project-image {
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        .project-description {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .project-features {
+            margin: 25px 0;
+        }
+        
+        .project-features h4 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .feature-item {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid #4a90e2;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .feature-item span {
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        
+        .project-tech {
+            margin: 25px 0;
+        }
+        
+        .project-tech h4 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .project-link {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .project-link:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2d5a8a 100%);
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .project-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .project-image {
+                width: 100%;
+                height: 150px;
+            }
+            
+            .project-item {
+                padding: 30px 20px;
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="portfolio-header">
+    <div class="page-header">
+        <h2 class="page-title">My Projects</h2>
+        <a href="{{ url_for('index') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </div>
+    
+    <div class="projects-section">
+        <div class="project-item">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>E-Commerce Platform</h3>
+                    <div class="category">Full Stack Web Application</div>
+                    <div class="duration">January 2024 - March 2024</div>
+                </div>
+                <div class="project-image">🛒</div>
+            </div>
+            <div class="project-description">
+                A comprehensive e-commerce platform with user authentication, product management, 
+                shopping cart functionality, payment integration, and admin dashboard. Built with 
+                modern web technologies for optimal performance and user experience.
+            </div>
+            <div class="project-features">
+                <h4>Key Features:</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span>User Authentication & Authorization</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Product Catalog & Search</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Shopping Cart & Checkout</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Payment Gateway Integration</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Admin Dashboard</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Order Management</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-tech">
+                <h4>Technologies Used:</h4>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">Stripe API</span>
+                    <span class="tech-tag">JWT</span>
+                </div>
+            </div>
+            <div class="project-links">
+                <a href="#" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </div>
+        </div>
+        
+        <div class="project-item">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <div class="category">React Web Application</div>
+                    <div class="duration">November 2023 - December 2023</div>
+                </div>
+                <div class="project-image">📋</div>
+            </div>
+            <div class="project-description">
+                A collaborative task management application with real-time updates, drag-and-drop 
+                functionality, team collaboration features, and progress tracking. Designed for 
+                teams to efficiently manage projects and deadlines.
+            </div>
+            <div class="project-features">
+                <h4>Key Features:</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span>Drag & Drop Interface</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Real-time Updates</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Team Collaboration</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Progress Tracking</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>File Attachments</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Notifications</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-tech">
+                <h4>Technologies Used:</h4>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Socket.io</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Material-UI</span>
+                </div>
+            </div>
+            <div class="project-links">
+                <a href="#" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </div>
+        </div>
+        
+        <div class="project-item">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>Weather Dashboard</h3>
+                    <div class="category">Frontend Application</div>
+                    <div class="duration">September 2023 - October 2023</div>
+                </div>
+                <div class="project-image">🌤️</div>
+            </div>
+            <div class="project-description">
+                A responsive weather dashboard that displays current weather conditions, forecasts, 
+                and weather maps for any location worldwide. Features include location search, 
+                temperature units conversion, and detailed weather information.
+            </div>
+            <div class="project-features">
+                <h4>Key Features:</h4>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span>Current Weather Display</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>5-Day Forecast</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Location Search</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Weather Maps</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Unit Conversion</span>
+                    </div>
+                    <div class="feature-item">
+                        <span>Responsive Design</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-tech">
+                <h4>Technologies Used:</h4>
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Weather API</span>
+                    <span class="tech-tag">Chart.js</span>
+                </div>
+            </div>
+            <div class="project-links">
+                <a href="#" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </div>
+        </div>
+        <!-- Portfolio Website Project Entry -->
+        <div class="project-item">
+            <div class="project-header">
+                <div class="project-info">
+                    <h3>Personal Portfolio Website</h3>
+                    <div class="category">Flask Web Application</div>
+                    <div class="duration">June 2024 - July 2024</div>
+                </div>
+                <div class="project-image">🧑‍💻</div>
+            </div>
+            <div class="project-description">
+                A modern, responsive personal portfolio website built with Flask, featuring a hero section, project showcase, achievements, education, and more. Designed for easy navigation and a consistent, visually appealing user experience across all pages.
+            </div>
+            <div class="project-features">
+                <h4>Key Features:</h4>
+                <div class="features-list">
+                    <div class="feature-item"><span>API integration for Chatbot</span></div>
+                    <div class="feature-item"><span>Project & Skills Showcase</span></div>
+                    <div class="feature-item"><span>Responsive Design</span></div>
+                    <div class="feature-item"><span>Flask Routing & Navigation</span></div>
+                    <div class="feature-item"><span>Consistent UI/UX</span></div>
+                </div>
+            </div>
+            <div class="project-tech">
+                <h4>Technologies Used:</h4>
+                <div class="tech-stack">
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Jinja2</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </div>
+            <div class="project-links">
+                <a href="{{ url_for('index') }}" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> View Portfolio
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-bubble" id="chat-bubble">
+        <span class="chat-bubble-icon">&#128172;</span>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">MY ASSISTANT</div>
+        <div id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off" />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            function appendMessage(text, type) {
+                let className = 'message ';
+                if (type === 'user') className += 'user-message';
+                else if (type === 'assistant') className += 'assistant-message';
+                else className += 'error-message';
+                $('#messages').append('<div class="' + className + '">' + text + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight);
+            }
+
+            $('#send-button').click(function() {
+                const message = $('#user-input').val().trim();
+                if (!message) return;
+                appendMessage('You: ' + message, 'user');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chat',
+                    type: 'POST',
+                    data: JSON.stringify({ message: message }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.reply) {
+                            appendMessage('Assistant: ' + data.reply, 'assistant');
+                        } else {
+                            appendMessage('Error: ' + (data.error || 'No reply'), 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        appendMessage('Error: Could not reach API (' + error + ')', 'error');
+                    }
+                });
+            });
+
+            $('#user-input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#send-button').click();
+                }
+            });
+
+            $('#chat-bubble').click(function() {
+                $('.chat-container').toggle();
+            });
+        });
+    </script>
+</body>
+</html> 

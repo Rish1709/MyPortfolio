@@ -1,0 +1,14 @@
+#send-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#send-button:hover {
+    background: linear-gradient(90deg, #8f94fb 0%, #4e54c8 100%);
+}

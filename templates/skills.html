@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - Rishabh Chaudhary</title>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat-bubble.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume-cards.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        .page-title {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2d5a8a 100%);
+            transform: scale(1.05);
+        }
+        
+        .skills-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .skills-category {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .skills-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #4a90e2;
+        }
+        
+        .category-title {
+            color: #4a90e2;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-item {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid #4a90e2;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: scale(1.05);
+            background: rgba(74, 144, 226, 0.2);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            color: #4a90e2;
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .skill-level {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        .skill-description {
+            color: #cccccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+        
+        .expertise-levels {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .expertise-item {
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .expertise-item .level {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .expertise-item .description {
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .skills-category {
+                padding: 30px 20px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .expertise-levels {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body> 
+    <div class="page-header">
+        <h2 class="page-title">Technical Skills</h2>
+        <a href="{{ url_for('index') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </div>
+    
+    <div class="skills-section">
+        <div class="expertise-levels">
+            <div class="expertise-item">
+                <div class="level">Expert</div>
+                <div class="description">90-100%</div>
+            </div>
+            <div class="expertise-item">
+                <div class="level">Advanced</div>
+                <div class="description">75-89%</div>
+            </div>
+            <div class="expertise-item">
+                <div class="level">Intermediate</div>
+                <div class="description">60-74%</div>
+            </div>
+            <div class="expertise-item">
+                <div class="level">Beginner</div>
+                <div class="description">40-59%</div>
+            </div>
+        </div>
+        
+        <div class="skills-category">
+            <h3 class="category-title">Frontend Development</h3>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <div class="skill-name">HTML5</div>
+                    <div class="skill-level">Expert</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                    <div class="skill-description">Semantic markup, accessibility, SEO optimization</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <div class="skill-name">CSS3</div>
+                    <div class="skill-level">Expert</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                    <div class="skill-description">Flexbox, Grid, Animations, Responsive Design</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <div class="skill-name">JavaScript</div>
+                    <div class="skill-level">Advanced</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                    <div class="skill-description">ES6+, DOM manipulation, Async programming</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-react"></i></div>
+                    <div class="skill-name">React</div>
+                    <div class="skill-level">Advanced</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                    <div class="skill-description">Hooks, Context API, Redux, Component lifecycle</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
+                    <div class="skill-name">Vue.js</div>
+                    <div class="skill-level">Intermediate</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                    <div class="skill-description">Vue 3, Composition API, Vuex</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-sass"></i></div>
+                    <div class="skill-name">SASS/SCSS</div>
+                    <div class="skill-level">Advanced</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                    <div class="skill-description">Variables, Mixins, Functions, Nesting</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-category">
+            <h3 class="category-title">Backend Development</h3>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                    <div class="skill-name">Node.js</div>
+                    <div class="skill-level">Advanced</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                    <div class="skill-description">Express.js, REST APIs, Middleware</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-python"></i></div>
+                    <div class="skill-name">Python</div>
+                    <div class="skill-level">Intermediate</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                    <div class="skill-description">Django, Flask, Data processing</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <div class="skill-name">MongoDB</div>
+                    <div class="skill-level">Intermediate</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                    <div class="skill-description">CRUD operations, Aggregation, Indexing</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-server"></i></div>
+                    <div class="skill-name">PostgreSQL</div>
+                    <div class="skill-level">Intermediate</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 65%"></div>
+                    </div>
+                    <div class="skill-description">SQL queries, Joins, Stored procedures</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-category">
+            <h3 class="category-title">Tools & Technologies</h3>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                    <div class="skill-name">Git</div>
+                    <div class="skill-level">Advanced</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                    <div class="skill-description">Version control, Branching, GitHub workflows</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-docker"></i></div>
+                    <div class="skill-name">Docker</div>
+                    <div class="skill-level">Intermediate</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 60%"></div>
+                    </div>
+                    <div class="skill-description">Containerization, Docker Compose</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-aws"></i></div>
+                    <div class="skill-name">AWS</div>
+                    <div class="skill-level">Beginner</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 50%"></div>
+                    </div>
+                    <div class="skill-description">EC2, S3, Cloud deployment</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-figma"></i></div>
+                    <div class="skill-name">Figma</div>
+                    <div class="skill-level">Intermediate</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                    <div class="skill-description">UI/UX design, Prototyping, Collaboration</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-bubble" id="chat-bubble">
+        <span class="chat-bubble-icon">&#128172;</span>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">MY ASSISTANT</div>
+        <div id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off" />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            function appendMessage(text, type) {
+                let className = 'message ';
+                if (type === 'user') className += 'user-message';
+                else if (type === 'assistant') className += 'assistant-message';
+                else className += 'error-message';
+                $('#messages').append('<div class="' + className + '">' + text + '</div>');
+                $('#messages').scrollTop($('#messages')[0].scrollHeight);
+            }
+
+            $('#send-button').click(function() {
+                const message = $('#user-input').val().trim();
+                if (!message) return;
+                appendMessage('You: ' + message, 'user');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chat',
+                    type: 'POST',
+                    data: JSON.stringify({ message: message }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.reply) {
+                            appendMessage('Assistant: ' + data.reply, 'assistant');
+                        } else {
+                            appendMessage('Error: ' + (data.error || 'No reply'), 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        appendMessage('Error: Could not reach API (' + error + ')', 'error');
+                    }
+                });
+            });
+
+            $('#user-input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#send-button').click();
+                }
+            });
+
+            $('#chat-bubble').click(function() {
+                $('.chat-container').toggle();
+            });
+        });
+    </script>
+</body>
+</html> 
