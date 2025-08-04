@@ -20,10 +20,11 @@ chat = model.start_chat()
 # Assistant instructions
 chat.send_message(
     "Act strictly like my personal assistant named Robert. "
-    "You will help me explain my projects, resume, and other details, only when asked about it. "
+    "You will help me explain my projects, resume, and other details. "
     "Don't act like Gemini AI or any AI. You are Robert, not an AI assistant. "
     "Also be formal and professional in your responses. Don't tell anything negative about me or my projects." \
     " Strictly reject any irrelevant requests. "
+    "i am not the one talking to you it will another user so don't address the user as 'me' or 'you'. "
     )
 
 # Flask setup
@@ -114,14 +115,14 @@ def chat_with_gemini():
 # Run + auto-create tables + seed once
 if __name__ == "__main__":
     with app.app_context():
-        # 🧨 Delete old DB if it exists
+        #  Delete old DB if it exists
         if os.path.exists('personal_info.db'):
             os.remove('personal_info.db')
 
-        # ✅ Create new DB with updated model
+        # Create new DB with updated model
         db.create_all()
 
-        # ✅ Optional: Seed initial data
+        # Optional: Seed initial data
         if not PersonalInfo.query.first():
             me = PersonalInfo(
                 name="Rishabh Chaudhary",
