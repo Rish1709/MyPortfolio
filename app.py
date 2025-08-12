@@ -128,7 +128,7 @@ if __name__ == "__main__":
                 name="Rishabh Chaudhary",
                 school="Sagar Public School, Bhopal",
                 class_x_grade="95%",
-                class_xii_grade="84.7%",
+                class_xii_grade="89.7%",
                 jeemains_rank="99.4 percentile",
                 jeeadv_rank="11572",
                 college="INDIAN INSTITUTE OF TECHNOLOGY (BHU), VARANASI",
